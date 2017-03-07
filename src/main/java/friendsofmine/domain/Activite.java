@@ -20,4 +20,11 @@ public class Activite {
         this.descriptif = descriptif;
     }
 
+    public String getTitre() {
+        return titre;
+    }
+
+    public String getDescriptif() {
+        return descriptif;
+    }
 }

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Friends of Mine</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+
+<h1>Liste des utilisateurs</h1>
+
+<table>
+    <thead>
+    </thead>
+    <tbody>
+        <tr th:each="utilisateur : ${utilisateurs}">
+            <td th:text="${utilisateur.nom}"></td>
+            <td th:text="${utilisateur.prenom}"></td>
+            <td th:text="${utilisateur.sexe}"></td>
+            <td th:text="${utilisateur.email}"></td>
+        </tr>
+    </tbody>
+</table>
+
+</body>
+
+</html>

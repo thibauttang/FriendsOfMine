@@ -11,7 +11,6 @@ import java.util.Date;
  * Created by thibauttang on 28/02/2017.
  */
 
-@Controller
 public class Utilisateur {
 
     @NotNull
@@ -48,4 +47,23 @@ public class Utilisateur {
         this.date = date;
     }
 
+    public String getNom() {
+        return nom;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getSexe() {
+        return sexe;
+    }
+
+    public Date getDate() {
+        return date;
+    }
 }
