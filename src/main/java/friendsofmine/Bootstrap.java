@@ -28,12 +28,16 @@ public class Bootstrap {
     }
 
 
-    public ArrayList<Utilisateur> getUtilisateurs(){
+    public ArrayList<Utilisateur> getUtilisateurs() {
         return initialisationService.getListUtilisateurs();
     }
 
-    public ArrayList<Activite> getActivites(){
+    public ArrayList<Activite> getActivites() {
         return initialisationService.getListActivites();
+    }
+
+    public InitialisationService getInitialisationService() {
+        return initialisationService;
     }
 
 }

@@ -2,6 +2,9 @@ package friendsofmine.domain;
 
 import org.springframework.stereotype.Controller;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -11,7 +14,13 @@ import java.util.Date;
  * Created by thibauttang on 28/02/2017.
  */
 
+@Entity
 public class Utilisateur {
+
+    public Utilisateur(){}
+
+    @Id @GeneratedValue
+    long id; // Clé primaire de type Long générée automatiquement (TP2 1.1)
 
     @NotNull
     @Size(min=1)
@@ -65,5 +74,13 @@ public class Utilisateur {
 
     public Date getDate() {
         return date;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
