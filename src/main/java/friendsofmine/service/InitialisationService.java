@@ -1,45 +1,68 @@
 package friendsofmine.service;
 
-import friendsofmine.domain.Utilisateur;
 import friendsofmine.domain.Activite;
-
+import friendsofmine.domain.Utilisateur;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-
-/**
- * Created by thibauttang on 28/02/2017.
- */
 
 @Service
 public class InitialisationService {
 
+    @Autowired
+    private ActiviteService activiteService;
 
-    private ArrayList<Utilisateur> listUtilisateurs = new ArrayList<>();
-    private ArrayList<Activite> listActivites = new ArrayList<>();
+    private Utilisateur thom, mary;
+    private Activite randonnee, lindyhop, taekwondo;
 
-
-    public void initDonnees(){
-        listUtilisateurs.add(new Utilisateur("Tang", "Thibaut", "thibaut.tang@gmail.com", "M"));
-        listUtilisateurs.add(new Utilisateur("Foissac", "Léa", "lea.foissac@gmail.com", "F"));
-        listUtilisateurs.add(new Utilisateur("Guilbert", "Sarah", "sarah.guilbert@gmail.com", "F"));
-        listUtilisateurs.add(new Utilisateur("De Lima", "Marianna", "marianna.delima@gmail.com", "F"));
-        listUtilisateurs.add(new Utilisateur("Laurent", "Théo", "theo.laurent@gmail.com", "M"));
-
-        listActivites.add(new Activite("Tennis", "Ca se joue avec une raquette et une balle"));
-        listActivites.add(new Activite("Bowling", "Il faut lancer une boule pour faire tomber des quilles"));
-        listActivites.add(new Activite("Manger", "En solo ou à plusieurs, c'est toujours bien de manger"));
+    public void initDonnees() {
+        initMary();
+        initThom();
+        initRandonnee();
+        initLindyHop();
+        initTaekwondo();
     }
 
-
-    public ArrayList<Utilisateur> getListUtilisateurs() {
-        return listUtilisateurs;
+    private void initThom() {
+        thom = new Utilisateur("Thom", "Thom", "thom@thom.com", "M");
     }
 
-
-    public ArrayList<Activite> getListActivites() {
-        return listActivites;
+    private void initMary() {
+        mary = new Utilisateur("Mary", "Mary", "mary@mary.com", "F");
     }
 
+    private void initTaekwondo() {
+        taekwondo = new Activite("Taekwondo", "le dimanche soir", thom);
+        activiteService.saveActivite(taekwondo);
 
+    }
+
+    private void initLindyHop() {
+        lindyhop = new Activite("Lindy Hop", "le jeudi soir", thom);
+        activiteService.saveActivite(lindyhop);
+    }
+
+    private void initRandonnee() {
+        randonnee = new Activite("Randonnee", "le lundi matin", mary);
+        activiteService.saveActivite(randonnee);
+    }
+
+    public Utilisateur getThom() {
+        return thom;
+    }
+
+    public Utilisateur getMary() {
+        return mary;
+    }
+
+    public Activite getRandonnee() {
+        return randonnee;
+    }
+
+    public Activite getLindyhop() {
+        return lindyhop;
+    }
+
+    public Activite getTaekwondo() {
+        return taekwondo;
+    }
 }

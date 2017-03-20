@@ -1,10 +1,12 @@
 package friendsofmine.repositories;
 
 import friendsofmine.domain.Activite;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
-/**
- * Created by thibauttang on 10/03/2017.
- */
-public interface ActiviteRepository extends PagingAndSortingRepository<Activite, Long>{
+public interface ActiviteRepository extends PagingAndSortingRepository<Activite, Long> {
+
+    // pour la correction du 1+n select
+    @Query("select activite from Activite activite join fetch activite.responsable order by activite.titre asc")
+    public Iterable<Activite> findAll();
 }

@@ -1,86 +1,127 @@
 package friendsofmine.domain;
 
-import org.springframework.stereotype.Controller;
+import org.hibernate.validator.constraints.Email;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
-
-/**
- * Created by thibauttang on 28/02/2017.
- */
 
 @Entity
 public class Utilisateur {
 
-    public Utilisateur(){}
-
-    @Id @GeneratedValue
-    long id; // Clé primaire de type Long générée automatiquement (TP2 1.1)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     @NotNull
-    @Size(min=1)
+    @Size(min = 1)
     private String nom;
 
     @NotNull
-    @Size(min=1)
+    @Size(min = 1)
     private String prenom;
 
     @NotNull
-    @Pattern(regexp="^[a-zA-Z-]+@[a-zA-Z-]+\\.[a-zA-Z]{2,6}$")
+    @Pattern(regexp = "^[a-zA-Z-]+@[a-zA-Z-]+\\.[a-zA-Z]{2,6}")
     private String email;
 
+    private Date dateNaissance;
+
     @NotNull
-    @Pattern(regexp="M|F")
+    @Pattern(regexp = "^[MF]{1}$")
     private String sexe;
 
-    private Date date;
+    @OneToMany(mappedBy = "responsable")
+    private Collection<Activite> activites = new ArrayList<Activite>();
 
-    public Utilisateur(String nom, String prenom, String email, String sexe) {
-        this.nom = nom;
-        this.prenom = prenom;
-        this.email = email;
-        this.sexe = sexe;
+    public Utilisateur() {
+        // Constructeur vide
     }
 
-
-    public Utilisateur(String nom, String prenom, String email, String sexe, Date date) {
-        this.nom = nom;
-        this.prenom = prenom;
-        this.email = email;
-        this.sexe = sexe;
-        this.date = date;
+    public Utilisateur(String unNom, String unPrenom, String unEmail,
+                       String unSexe, Date uneDateNaissance) {
+        nom = unNom;
+        prenom = unPrenom;
+        email = unEmail;
+        sexe = unSexe;
+        dateNaissance = uneDateNaissance;
     }
 
-    public String getNom() {
-        return nom;
-    }
-
-    public String getPrenom() {
-        return prenom;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getSexe() {
-        return sexe;
-    }
-
-    public Date getDate() {
-        return date;
+    public Utilisateur(String unNom, String unPrenom, String unEmail,
+                       String unSexe) {
+        this(unNom, unPrenom, unEmail, unSexe, null);
     }
 
     public Long getId() {
         return id;
     }
 
+    public void setId() { this.id = id; }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public Date getDateNaissance() {
+        return dateNaissance;
+    }
+
+    public void setDateNaissance(Date dateNaissance) {
+        this.dateNaissance = dateNaissance;
+    }
+
+    public String getSexe() {
+        return sexe;
+    }
+
+    public void setSexe(String sexe) {
+        this.sexe = sexe;
+    }
+
+    public Collection<Activite> getActivites() {
+        return activites;
+    }
+
+    public void setActivites(Collection<Activite> activites) {
+        this.activites = activites;
+    }
+
+    public void addActivite(Activite activite) {
+        if (!activites.contains(activite))
+            activites.add(activite);
+    }
+
+    @Override
+    public String toString() {
+        return "Utilisateur{" +
+                "id=" + id +
+                ", nom='" + nom + '\'' +
+                ", prenom='" + prenom + '\'' +
+                '}';
+    }
+
 }

@@ -1,18 +1,13 @@
 package friendsofmine.controllers;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-/**
- * Created by thibauttang on 27/02/2017.
- */
+import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class IndexController {
 
-    @RequestMapping("/")
-    String index(){
+    @GetMapping("/")
+    String index() {
         return "index";
     }
-
 }

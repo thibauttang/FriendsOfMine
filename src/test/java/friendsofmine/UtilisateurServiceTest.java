@@ -20,7 +20,6 @@ public class UtilisateurServiceTest {
     @Autowired
     private UtilisateurService utilisateurService;
 
-
     private Utilisateur util, util1;
 
     @Before
@@ -32,7 +31,7 @@ public class UtilisateurServiceTest {
 
     @Test
     public void testSaveUtilisateur(){
-        //assertNull(util.getId());
+        assertNull(util.getId());
         utilisateurService.saveUtilisateur(util);
         assertNotNull(util.getId());
     }
